@@ -28,6 +28,8 @@ bed.sow(0, tomato);
 
 #### Checking harvest date
 
+Note: Harvest date will only exist if a vegetable has been sown.
+
 ``` java
 // Directly from the vegetable
 LocalDate harvestDate = tomato.getHarvestDate();

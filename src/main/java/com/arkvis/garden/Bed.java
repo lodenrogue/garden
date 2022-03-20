@@ -33,4 +33,8 @@ public class Bed {
     public boolean canSow(int square, Vegetable vegetable) {
         return squares.get(square).canSow(vegetable);
     }
+
+    public int getNumberOfSquares() {
+        return squares.size();
+    }
 }

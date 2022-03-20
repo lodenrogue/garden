@@ -64,3 +64,9 @@ plant per square foot.
 int square = 0;
 boolean canSow = bed.canSow(square, vegetable);
 ```
+
+### Getting number of squares in bed
+
+``` java
+int numOfSquares = bed.getNumberOfSquares();
+```

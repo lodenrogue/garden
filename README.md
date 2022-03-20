@@ -1,7 +1,5 @@
 ## Garden
 
-Usage
-
 ### Creating a bed
 
 ``` java

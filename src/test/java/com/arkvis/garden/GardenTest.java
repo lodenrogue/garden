@@ -45,7 +45,7 @@ class GardenTest {
     }
 
     @Test
-    void should_returnFalse_when_checkingIfCanSowInSquareWithNotPoints() {
+    void should_returnFalse_when_checkingIfCanSowInSquareWithNotEnoughPoints() {
         Vegetable tomato = new Vegetable("tomato", 36, 16);
         Vegetable corn = new Vegetable("tomato", 45, 4);
 

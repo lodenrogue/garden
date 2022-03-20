@@ -29,9 +29,22 @@ LocalDate sowingDate = LocalDate.now().plusDays(10);
 bed.sow(squareToSow, tomato, sowingDate);
 ```
 
-### Checking harvest date
+### Getting sowing date
 
-Note: Harvest date will only exist if a vegetable has been sown.
+Note: Sowing date will only exist if a vegetable has been sown
+
+``` java
+// Directly from the vegetable
+LocalDate sowingDate = tomato.getSowingDate();
+
+// or from the vegetables sown in the bed
+List<Vegetable> sownVegetables = bed.getSownVegetables(squareToSow);
+sownVegetables.forEach(veg -> System.out.println(veg.getSowingDate()));
+```
+
+### Getting harvest date
+
+Note: Harvest date will only exist if a vegetable has been sown
 
 ``` java
 // Directly from the vegetable

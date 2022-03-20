@@ -5,9 +5,9 @@ import org.junit.jupiter.api.Test;
 import java.time.LocalDate;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class GardenTest {
+class HarvestTest {
 
     @Test
     void should_returnCorrectHarvestDate_when_sowingVegetable() {
@@ -35,23 +35,6 @@ class GardenTest {
 
         assertEquals(LocalDate.now().plusDays(basilDaysToHarvest), basil.getHarvestDate());
         assertEquals(LocalDate.now().plusDays(cornDaysToHarvest), corn.getHarvestDate());
-    }
-
-    @Test
-    void should_returnTrue_when_checkingIfCanSowInSquareWithEnoughPoints() {
-        Vegetable tomato = new Vegetable("tomato", 36, 16);
-        Bed bed = new Bed(1);
-        assertTrue(bed.canSow(0, tomato));
-    }
-
-    @Test
-    void should_returnFalse_when_checkingIfCanSowInSquareWithNotEnoughPoints() {
-        Vegetable tomato = new Vegetable("tomato", 36, 16);
-        Vegetable corn = new Vegetable("tomato", 45, 4);
-
-        Bed bed = new Bed(1);
-        bed.sow(0, tomato);
-        assertFalse(bed.canSow(0, corn));
     }
 
     private Vegetable getVegetableByName(String name, List<Vegetable> vegetables) {

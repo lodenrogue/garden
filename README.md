@@ -1,15 +1,15 @@
-### Garden
+## Garden
 
 Usage
 
-#### Creating a bed
+### Creating a bed
 
 ``` java
 int numberOfSquares = 10;
 Bed bed = new Bed(numberOfSquares);
 ```
 
-#### Sowing a vegetable
+### Sowing a vegetable
 
 Since we're using the square foot gardening method size should be 16 divided by how many of that vegetable we can sow in
 a square. For example, square foot gardening says we can only sow 1 tomato in a square foot so the size would be 16 / 1
@@ -26,7 +26,7 @@ int squareToSow = 0;
 bed.sow(0, tomato);
 ```
 
-#### Checking harvest date
+### Checking harvest date
 
 Note: Harvest date will only exist if a vegetable has been sown.
 
@@ -39,7 +39,7 @@ List<Vegetable> sownVegetables = bed.getSownVegetables(squareToSow);
 sownVegetables.forEach(veg -> System.out.println(veg.getHarvestDate()));
 ```
 
-#### Checking whether vegetable can be sown in square
+### Checking whether vegetable can be sown in square
 
 This is useful since we're using the square foot gardening method and there are a limited number of vegetables we can
 plant per square foot.

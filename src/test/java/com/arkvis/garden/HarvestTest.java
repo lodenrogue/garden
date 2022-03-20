@@ -37,6 +37,18 @@ class HarvestTest {
         assertEquals(LocalDate.now().plusDays(cornDaysToHarvest), corn.getHarvestDate());
     }
 
+    @Test
+    void should_returnCorrectHarvestDate_when_sowingVegetableWithSowingDate() {
+        LocalDate sowingDate = LocalDate.now().plusDays(20);
+        int daysToHarvest = 36;
+
+        Bed bed = new Bed(1);
+        bed.sow(0, new Vegetable("tomato", daysToHarvest, 16), sowingDate);
+
+        Vegetable tomato = getVegetableByName("tomato", bed.getSownVegetables(0));
+        assertEquals(sowingDate.plusDays(daysToHarvest), tomato.getHarvestDate());
+    }
+
     private Vegetable getVegetableByName(String name, List<Vegetable> vegetables) {
         return vegetables.stream()
                 .filter(veg -> veg.getName().equals(name))

@@ -1,5 +1,6 @@
 package com.arkvis.garden;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -12,9 +13,9 @@ class Square {
         sownVegetables = new ArrayList<>();
     }
 
-    void sow(Vegetable vegetable) {
+    void sow(Vegetable vegetable, LocalDate sowingDate) {
         if (canSow(vegetable)) {
-            vegetable.sow();
+            vegetable.sow(sowingDate);
             pointsAvailable -= vegetable.getSize();
             sownVegetables.add(vegetable);
         }

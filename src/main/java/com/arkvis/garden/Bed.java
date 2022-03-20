@@ -1,5 +1,6 @@
 package com.arkvis.garden;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -12,7 +13,11 @@ public class Bed {
     }
 
     public void sow(int square, Vegetable vegetable) {
-        squares.get(square).sow(vegetable);
+        sow(square, vegetable, LocalDate.now());
+    }
+
+    public void sow(int square, Vegetable vegetable, LocalDate sowingDate) {
+        squares.get(square).sow(vegetable, sowingDate);
     }
 
     public List<Vegetable> getSownVegetables(int square) {

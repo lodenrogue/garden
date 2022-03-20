@@ -23,8 +23,8 @@ public class Vegetable {
         return harvestDate;
     }
 
-    void sow() {
-        harvestDate = LocalDate.now().plusDays(daysToHarvest);
+    void sow(LocalDate sowingDate) {
+        harvestDate = sowingDate.plusDays(daysToHarvest);
     }
 
     int getSize() {

@@ -19,9 +19,14 @@ int daysToHarvest = 60;
 int size = 16;
 
 Vegetable tomato = new Vegetable(name, daysToHarvest, size);
-
 int squareToSow = 0;
-bed.sow(0, tomato);
+
+// Sow now
+bed.sow(squareToSow, tomato);
+
+// Or with a give sowing date
+LocalDate sowingDate = LocalDate.now().plusDays(10);
+bed.sow(squareToSow, tomato, sowingDate);
 ```
 
 ### Checking harvest date

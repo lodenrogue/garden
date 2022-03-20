@@ -11,6 +11,10 @@ Bed bed = new Bed(numberOfSquares);
 
 #### Sowing a vegetable
 
+Since we're using the square foot gardening method size should be 16 divided by how many of that vegetable we can sow in
+a square. For example, square foot gardening says we can only sow 1 tomato in a square foot so the size would be 16 / 1
+which equals 16.
+
 ``` java
 String name = "tomato";
 int daysToHarvest = 60;

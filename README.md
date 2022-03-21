@@ -67,8 +67,17 @@ boolean canSow = bed.canSow(square, vegetable);
 
 ### Harvesting a vegetable
 
+Note: Harvested date will only exist if a vegetable has been harvested
+
 ``` java
+// Harvest now
 bed.harvest(tomato);
+
+// or at a given harvest date
+LocalDate harvestDate = LocalDate.now().minusDays(10);
+bed.harvest(tomato, harvestDate);
+
+LocalDate harvestedDate = tomato.getHarvestedDate();
 ```
 
 ### Getting number of squares in bed

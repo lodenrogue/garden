@@ -29,7 +29,10 @@ class Square {
         return pointsAvailable - vegetable.getSize() >= 0;
     }
 
-    void harvest(Vegetable vegetable) {
-        sownVegetables.remove(vegetable);
+    void harvest(Vegetable vegetable, LocalDate harvestDate) {
+        if (sownVegetables.contains(vegetable)) {
+            vegetable.harvest(harvestDate);
+            sownVegetables.remove(vegetable);
+        }
     }
 }

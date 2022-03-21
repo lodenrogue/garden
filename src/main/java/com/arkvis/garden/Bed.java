@@ -39,6 +39,10 @@ public class Bed {
     }
 
     public void harvest(Vegetable vegetable) {
-        squares.forEach(square -> square.harvest(vegetable));
+        harvest(vegetable, LocalDate.now());
+    }
+
+    public void harvest(Vegetable vegetable, LocalDate harvestDate) {
+        squares.forEach(square -> square.harvest(vegetable, harvestDate));
     }
 }

@@ -8,6 +8,7 @@ public class Vegetable {
     private final int size;
 
     private LocalDate sowingDate;
+    private LocalDate harvestedDate;
 
     public Vegetable(String name, int daysToHarvest, int size) {
         this.name = name;
@@ -19,7 +20,7 @@ public class Vegetable {
         return name;
     }
 
-    public LocalDate getHarvestDate() {
+    public LocalDate getProjectedHarvestDate() {
         return sowingDate.plusDays(daysToHarvest);
     }
 
@@ -27,8 +28,16 @@ public class Vegetable {
         return sowingDate;
     }
 
+    public LocalDate getHarvestedDate() {
+        return harvestedDate;
+    }
+
     void sow(LocalDate sowingDate) {
         this.sowingDate = sowingDate;
+    }
+
+    void harvest(LocalDate harvestDate) {
+        this.harvestedDate = harvestDate;
     }
 
     int getSize() {

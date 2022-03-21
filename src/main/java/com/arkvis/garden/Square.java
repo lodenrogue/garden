@@ -32,6 +32,7 @@ class Square {
     void harvest(Vegetable vegetable, LocalDate harvestDate) {
         if (sownVegetables.contains(vegetable)) {
             vegetable.harvest(harvestDate);
+            pointsAvailable += vegetable.getSize();
             sownVegetables.remove(vegetable);
         }
     }

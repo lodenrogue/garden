@@ -43,4 +43,16 @@ class SowingTest {
         bed.sow(0, tomato);
         assertFalse(bed.canSow(0, corn));
     }
+
+    @Test
+    void should_returnTrue_when_checkingIfCanSowInSquareAfterVegetableHasBeenHarvested() {
+        Vegetable tomato = new Vegetable("tomato", 36, 16);
+        Vegetable kale = new Vegetable("kale", 40, 16);
+
+        Bed bed = new Bed(1);
+        bed.sow(0, tomato);
+        bed.harvest(tomato);
+
+        assertTrue(bed.canSow(0, kale));
+    }
 }

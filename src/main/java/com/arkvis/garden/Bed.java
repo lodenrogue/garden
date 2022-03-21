@@ -37,4 +37,8 @@ public class Bed {
     public int getNumberOfSquares() {
         return squares.size();
     }
+
+    public void harvest(Vegetable vegetable) {
+        squares.forEach(square -> square.harvest(vegetable));
+    }
 }

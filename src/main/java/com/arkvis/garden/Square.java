@@ -28,4 +28,8 @@ class Square {
     boolean canSow(Vegetable vegetable) {
         return pointsAvailable - vegetable.getSize() >= 0;
     }
+
+    void harvest(Vegetable vegetable) {
+        sownVegetables.remove(vegetable);
+    }
 }

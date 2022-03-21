@@ -65,6 +65,12 @@ int square = 0;
 boolean canSow = bed.canSow(square, vegetable);
 ```
 
+### Harvesting a vegetable
+
+``` java
+bed.harvest(tomato);
+```
+
 ### Getting number of squares in bed
 
 ``` java

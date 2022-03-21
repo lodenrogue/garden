@@ -6,6 +6,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 class HarvestTest {
 
@@ -47,6 +48,18 @@ class HarvestTest {
 
         Vegetable tomato = getVegetableByName("tomato", bed.getSownVegetables(0));
         assertEquals(sowingDate.plusDays(daysToHarvest), tomato.getHarvestDate());
+    }
+
+    @Test
+    void should_notReturnVegetable_when_gettingVegetableFromBedThatHasBeenHarvested() {
+        Vegetable tomato = new Vegetable("tomato", 36, 16);
+
+        Bed bed = new Bed(1);
+        bed.sow(0, tomato);
+        bed.harvest(tomato);
+
+        Vegetable result = getVegetableByName("tomato", bed.getSownVegetables(0));
+        assertNull(result);
     }
 
     private Vegetable getVegetableByName(String name, List<Vegetable> vegetables) {

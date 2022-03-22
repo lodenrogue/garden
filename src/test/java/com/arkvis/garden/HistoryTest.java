@@ -50,8 +50,8 @@ class HistoryTest {
         bed.sow(0, basil, LocalDate.now().plusDays(10));
         bed.sow(0, corn, LocalDate.now().minusDays(15));
 
-        bed.harvest(basil, LocalDate.now().plusDays(20));
-        bed.harvest(corn, LocalDate.now().plusDays(25));
+        bed.harvest(basil);
+        bed.harvest(corn);
 
         List<Vegetable> history = bed.getHistory(0);
         assertEquals(2, history.size());
@@ -61,6 +61,23 @@ class HistoryTest {
 
         assertHistory(basil, historicBasil);
         assertHistory(corn, historyCorn);
+    }
+
+    @Test
+    void should_returnHistorySortedByHarvestDate_when_gettingHistory() {
+        Vegetable newestVeg = new Vegetable("New", 16, 1);
+        Vegetable oldestVeg = new Vegetable("Old", 16, 1);
+
+        Bed bed = new Bed(1);
+        bed.sow(0, newestVeg);
+        bed.sow(0, oldestVeg);
+
+        bed.harvest(newestVeg, LocalDate.now().plusDays(100));
+        bed.harvest(oldestVeg, LocalDate.now().plusDays(10));
+
+        List<Vegetable> history = bed.getHistory(0);
+        assertHistory(oldestVeg, history.get(0));
+        assertHistory(newestVeg, history.get(1));
     }
 
     private void assertHistory(Vegetable sownVegetable, Vegetable historyVegetable) {

@@ -3,6 +3,7 @@ package com.arkvis.garden;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 class Square {
@@ -35,9 +36,10 @@ class Square {
         if (sownVegetables.contains(vegetable)) {
             vegetable.harvest(harvestDate);
             pointsAvailable += vegetable.getSize();
-
             sownVegetables.remove(vegetable);
+
             history.add(vegetable);
+            history.sort(Comparator.comparing(Vegetable::getHarvestedDate));
         }
     }
 

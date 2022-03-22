@@ -82,7 +82,8 @@ LocalDate harvestedDate = tomato.getHarvestedDate();
 
 ### Getting history of a square
 
-A vegetable will be in the history of a square after it has been harvested. This is useful knowledge for crop rotation
+A vegetable will be in the history of a square after it has been harvested. This is useful knowledge for crop rotation.
+History is sorted oldest harvested vegetable first.
 
 ``` java
 List<Vegetable> history = bed.getHistory(square);

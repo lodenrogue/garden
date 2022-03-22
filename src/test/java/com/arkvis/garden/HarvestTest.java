@@ -12,12 +12,14 @@ class HarvestTest {
 
     @Test
     void should_returnCorrectProjectedHarvestDate_when_sowingVegetable() {
-        Bed bed = new Bed(1);
-
         int daysToHarvest = 36;
+
+        Bed bed = new Bed(1);
         bed.sow(0, new Vegetable("tomato", daysToHarvest, 16));
 
-        Vegetable tomato = getVegetableByName("tomato", bed.getSownVegetables(0));
+        List<Vegetable> sownVegetables = bed.getSownVegetables(0);
+        Vegetable tomato = new VegetableFinder(sownVegetables).findByName("tomato");
+
         assertEquals(LocalDate.now().plusDays(daysToHarvest), tomato.getProjectedHarvestDate());
     }
 
@@ -31,8 +33,10 @@ class HarvestTest {
         bed.sow(0, new Vegetable("corn", cornDaysToHarvest, 4));
 
         List<Vegetable> sownVegetables = bed.getSownVegetables(0);
-        Vegetable basil = getVegetableByName("basil", sownVegetables);
-        Vegetable corn = getVegetableByName("corn", sownVegetables);
+        VegetableFinder vegetableFinder = new VegetableFinder(sownVegetables);
+
+        Vegetable basil = vegetableFinder.findByName("basil");
+        Vegetable corn = vegetableFinder.findByName("corn");
 
         assertEquals(LocalDate.now().plusDays(basilDaysToHarvest), basil.getProjectedHarvestDate());
         assertEquals(LocalDate.now().plusDays(cornDaysToHarvest), corn.getProjectedHarvestDate());
@@ -46,7 +50,8 @@ class HarvestTest {
         Bed bed = new Bed(1);
         bed.sow(0, new Vegetable("tomato", daysToHarvest, 16), sowingDate);
 
-        Vegetable tomato = getVegetableByName("tomato", bed.getSownVegetables(0));
+        List<Vegetable> sownVegetables = bed.getSownVegetables(0);
+        Vegetable tomato = new VegetableFinder(sownVegetables).findByName("tomato");
         assertEquals(sowingDate.plusDays(daysToHarvest), tomato.getProjectedHarvestDate());
     }
 
@@ -58,7 +63,8 @@ class HarvestTest {
         bed.sow(0, tomato);
         bed.harvest(tomato);
 
-        Vegetable result = getVegetableByName("tomato", bed.getSownVegetables(0));
+        List<Vegetable> sownVegetables = bed.getSownVegetables(0);
+        Vegetable result = new VegetableFinder(sownVegetables).findByName("tomato");
         assertNull(result);
     }
 
@@ -83,12 +89,5 @@ class HarvestTest {
         bed.harvest(tomato, harvestDate);
 
         assertEquals(harvestDate, tomato.getHarvestedDate());
-    }
-
-    private Vegetable getVegetableByName(String name, List<Vegetable> vegetables) {
-        return vegetables.stream()
-                .filter(veg -> veg.getName().equals(name))
-                .findFirst()
-                .orElse(null);
     }
 }

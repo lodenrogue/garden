@@ -25,18 +25,8 @@ public class Bed {
         return squares.get(square).getSownVegetables();
     }
 
-    private List<Square> createSquares(int numOfSquares) {
-        return IntStream.range(0, numOfSquares)
-                .mapToObj(i -> new Square())
-                .collect(Collectors.toList());
-    }
-
-    public boolean canSow(int square, Vegetable vegetable) {
-        return squares.get(square).canSow(vegetable);
-    }
-
-    public int getNumberOfSquares() {
-        return squares.size();
+    public List<Vegetable> getHistory(int square) {
+        return squares.get(square).getHistory();
     }
 
     public void harvest(Vegetable vegetable) {
@@ -47,7 +37,17 @@ public class Bed {
         squares.forEach(square -> square.harvest(vegetable, harvestDate));
     }
 
-    public List<Vegetable> getHistory(int square) {
-        return squares.get(square).getHistory();
+    public boolean canSow(int square, Vegetable vegetable) {
+        return squares.get(square).canSow(vegetable);
+    }
+
+    public int getNumberOfSquares() {
+        return squares.size();
+    }
+
+    private List<Square> createSquares(int numOfSquares) {
+        return IntStream.range(0, numOfSquares)
+                .mapToObj(i -> new Square())
+                .collect(Collectors.toList());
     }
 }

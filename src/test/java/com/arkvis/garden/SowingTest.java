@@ -44,7 +44,6 @@ class SowingTest {
     void should_returnCorrectSowingDate_when_gettingSowingDateFromVegetableInBedSownNow() {
         Bed bed = new Bed(1);
         Vegetable tomato = new Vegetable("tomato", 36, 16);
-
         bed.sow(0, tomato);
 
         List<Vegetable> vegetables = bed.getSownVegetables(0);

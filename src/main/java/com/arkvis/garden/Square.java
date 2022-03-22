@@ -7,10 +7,12 @@ import java.util.List;
 
 class Square {
     private final List<Vegetable> sownVegetables;
+    private final List<Vegetable> history;
     private int pointsAvailable = 16;
 
     Square() {
         sownVegetables = new ArrayList<>();
+        history = new ArrayList<>();
     }
 
     void sow(Vegetable vegetable, LocalDate sowingDate) {
@@ -35,5 +37,9 @@ class Square {
             pointsAvailable += vegetable.getSize();
             sownVegetables.remove(vegetable);
         }
+    }
+
+    List<Vegetable> getHistory() {
+        return Collections.unmodifiableList(history);
     }
 }

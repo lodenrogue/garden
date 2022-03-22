@@ -1,6 +1,7 @@
 package com.arkvis.garden;
 
 import java.time.LocalDate;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -44,5 +45,9 @@ public class Bed {
 
     public void harvest(Vegetable vegetable, LocalDate harvestDate) {
         squares.forEach(square -> square.harvest(vegetable, harvestDate));
+    }
+
+    public List<Vegetable> getHistory(int square) {
+        return squares.get(square).getHistory();
     }
 }

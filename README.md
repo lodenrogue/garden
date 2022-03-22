@@ -80,6 +80,14 @@ bed.harvest(tomato, harvestDate);
 LocalDate harvestedDate = tomato.getHarvestedDate();
 ```
 
+### Getting history of a square
+
+A vegetable will be in the history of a square after it has been harvested. This is useful knowledge for crop rotation
+
+``` java
+List<Vegetable> history = bed.getHistory(square);
+```
+
 ### Getting number of squares in bed
 
 ``` java

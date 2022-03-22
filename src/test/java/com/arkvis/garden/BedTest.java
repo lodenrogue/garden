@@ -22,11 +22,8 @@ class BedTest {
         bed.sow(0, tomato);
         bed.sow(1, corn);
 
-        Vegetable sownTomato = new VegetableFinder(bed.getSownVegetables(0))
-                .findByName(tomato.getName());
-
-        Vegetable sownCorn = new VegetableFinder(bed.getSownVegetables(1))
-                .findByName(corn.getName());
+        Vegetable sownTomato = bed.getSownVegetables(0).get(0);
+        Vegetable sownCorn = bed.getSownVegetables(1).get(0);
 
         assertEquals(tomato.getName(), sownTomato.getName());
         assertEquals(corn.getName(), sownCorn.getName());

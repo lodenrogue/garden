@@ -6,27 +6,29 @@ import java.time.LocalDate;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class HarvestTest {
 
     @Test
     void should_returnCorrectProjectedHarvestDate_when_sowingVegetable() {
         int daysToHarvest = 36;
+        LocalDate projectedHarvestDate = LocalDate.now().plusDays(daysToHarvest);
 
         Bed bed = new Bed(1);
         bed.sow(0, new Vegetable("tomato", daysToHarvest, 16));
 
-        List<Vegetable> sownVegetables = bed.getSownVegetables(0);
-        Vegetable tomato = new VegetableFinder(sownVegetables).findByName("tomato");
-
-        assertEquals(LocalDate.now().plusDays(daysToHarvest), tomato.getProjectedHarvestDate());
+        Vegetable tomato = bed.getSownVegetables(0).get(0);
+        assertEquals(projectedHarvestDate, tomato.getProjectedHarvestDate());
     }
 
     @Test
     void should_returnCorrectProjectedHarvestDate_when_sowingMultipleVegetables() {
         int basilDaysToHarvest = 36;
+        LocalDate basilProjectedHarvestDate = LocalDate.now().plusDays(basilDaysToHarvest);
+
         int cornDaysToHarvest = 45;
+        LocalDate cornProjectedHarvestDate = LocalDate.now().plusDays(cornDaysToHarvest);
 
         Bed bed = new Bed(1);
         bed.sow(0, new Vegetable("basil", basilDaysToHarvest, 4));
@@ -38,8 +40,8 @@ class HarvestTest {
         Vegetable basil = vegetableFinder.findByName("basil");
         Vegetable corn = vegetableFinder.findByName("corn");
 
-        assertEquals(LocalDate.now().plusDays(basilDaysToHarvest), basil.getProjectedHarvestDate());
-        assertEquals(LocalDate.now().plusDays(cornDaysToHarvest), corn.getProjectedHarvestDate());
+        assertEquals(basilProjectedHarvestDate, basil.getProjectedHarvestDate());
+        assertEquals(cornProjectedHarvestDate, corn.getProjectedHarvestDate());
     }
 
     @Test
@@ -50,13 +52,12 @@ class HarvestTest {
         Bed bed = new Bed(1);
         bed.sow(0, new Vegetable("tomato", daysToHarvest, 16), sowingDate);
 
-        List<Vegetable> sownVegetables = bed.getSownVegetables(0);
-        Vegetable tomato = new VegetableFinder(sownVegetables).findByName("tomato");
+        Vegetable tomato = bed.getSownVegetables(0).get(0);
         assertEquals(sowingDate.plusDays(daysToHarvest), tomato.getProjectedHarvestDate());
     }
 
     @Test
-    void should_notReturnVegetable_when_gettingSownVegetablesFromBedThatHasBeenHarvested() {
+    void should_notReturnAnyVegetables_when_gettingSownVegetablesFromBedThatHasBeenFullyHarvested() {
         Vegetable tomato = new Vegetable("tomato", 36, 16);
 
         Bed bed = new Bed(1);
@@ -64,8 +65,7 @@ class HarvestTest {
         bed.harvest(tomato);
 
         List<Vegetable> sownVegetables = bed.getSownVegetables(0);
-        Vegetable result = new VegetableFinder(sownVegetables).findByName("tomato");
-        assertNull(result);
+        assertTrue(sownVegetables.isEmpty());
     }
 
     @Test
@@ -74,8 +74,8 @@ class HarvestTest {
 
         Bed bed = new Bed(1);
         bed.sow(0, tomato);
-        bed.harvest(tomato);
 
+        bed.harvest(tomato);
         assertEquals(LocalDate.now(), tomato.getHarvestedDate());
     }
 
@@ -86,8 +86,8 @@ class HarvestTest {
 
         Bed bed = new Bed(1);
         bed.sow(0, tomato);
-        bed.harvest(tomato, harvestDate);
 
+        bed.harvest(tomato, harvestDate);
         assertEquals(harvestDate, tomato.getHarvestedDate());
     }
 }

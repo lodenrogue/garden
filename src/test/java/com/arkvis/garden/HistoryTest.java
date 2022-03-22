@@ -11,14 +11,14 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class HistoryTest {
 
     @Test
-    void should_returnEmptyHistory_when_gettingHistoryOfBedWithNoHistory() {
+    void should_returnEmptyHistory_when_gettingHistoryOfSquareWithNoHistory() {
         Bed bed = new Bed(1);
         List<Vegetable> history = bed.getHistory(0);
         assertTrue(history.isEmpty());
     }
 
     @Test
-    void should_returnEmptyHistory_when_gettingHistoryOfBedWithNoVegetablesHarvested() {
+    void should_returnEmptyHistory_when_gettingHistoryOfSquareWithNoVegetablesHarvested() {
         Bed bed = new Bed(1);
         bed.sow(0, new Vegetable("tomato", 36, 16));
 
@@ -27,7 +27,7 @@ class HistoryTest {
     }
 
     @Test
-    void should_returnCorrectHistory_when_gettingHistoryOfBedWithSingleVegetableHarvested() {
+    void should_returnCorrectHistory_when_gettingHistoryOfSquareWithSingleVegetableHarvested() {
         Vegetable tomato = new Vegetable("tomato", 36, 16);
 
         Bed bed = new Bed(1);
@@ -42,7 +42,7 @@ class HistoryTest {
     }
 
     @Test
-    void should_returnCorrectHistory_when_gettingHistoryOfBedWithMultipleVegetablesHarvested() {
+    void should_returnCorrectHistory_when_gettingHistoryOfSquareWithMultipleVegetablesHarvested() {
         Vegetable basil = new Vegetable("basil", 36, 4);
         Vegetable corn = new Vegetable("corn", 45, 4);
 
@@ -58,6 +58,25 @@ class HistoryTest {
 
         Vegetable historicBasil = history.get(0);
         Vegetable historyCorn = history.get(1);
+
+        assertHistory(basil, historicBasil);
+        assertHistory(corn, historyCorn);
+    }
+
+    @Test
+    void should_returnCorrectHistory_when_gettingHistoryOfMultipleSquares() {
+        Vegetable basil = new Vegetable("basil", 36, 4);
+        Vegetable corn = new Vegetable("corn", 45, 4);
+
+        Bed bed = new Bed(2);
+        bed.sow(0, basil, LocalDate.now().plusDays(10));
+        bed.sow(1, corn, LocalDate.now().minusDays(15));
+
+        bed.harvest(basil);
+        bed.harvest(corn);
+
+        Vegetable historicBasil = bed.getHistory(0).get(0);
+        Vegetable historyCorn = bed.getHistory(1).get(0);
 
         assertHistory(basil, historicBasil);
         assertHistory(corn, historyCorn);

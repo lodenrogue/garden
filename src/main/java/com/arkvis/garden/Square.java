@@ -8,51 +8,51 @@ import java.util.List;
 
 class Square {
     private final int rotationPeriodInYears;
-    private final List<Vegetable> sownVegetables;
-    private final List<Vegetable> history;
+    private final List<Crop> sownCrops;
+    private final List<Crop> history;
     private int pointsAvailable = 16;
 
     Square(int rotationPeriodInYears) {
         this.rotationPeriodInYears = rotationPeriodInYears;
-        sownVegetables = new ArrayList<>();
+        sownCrops = new ArrayList<>();
         history = new ArrayList<>();
     }
 
-    void sow(Vegetable vegetable, LocalDate sowingDate) {
-        if (canSow(vegetable)) {
-            vegetable.sow(sowingDate);
-            pointsAvailable -= vegetable.getSize();
-            sownVegetables.add(vegetable);
+    void sow(Crop crop, LocalDate sowingDate) {
+        if (canSow(crop)) {
+            crop.sow(sowingDate);
+            pointsAvailable -= crop.getSize();
+            sownCrops.add(crop);
         }
     }
 
-    List<Vegetable> getSownVegetables() {
-        return Collections.unmodifiableList(sownVegetables);
+    List<Crop> getSownCrops() {
+        return Collections.unmodifiableList(sownCrops);
     }
 
-    boolean canSow(Vegetable vegetable) {
-        return pointsAvailable - vegetable.getSize() >= 0;
+    boolean canSow(Crop crop) {
+        return pointsAvailable - crop.getSize() >= 0;
     }
 
-    void harvest(Vegetable vegetable, LocalDate harvestDate) {
-        if (sownVegetables.contains(vegetable)) {
-            vegetable.harvest(harvestDate);
-            pointsAvailable += vegetable.getSize();
-            sownVegetables.remove(vegetable);
+    void harvest(Crop crop, LocalDate harvestDate) {
+        if (sownCrops.contains(crop)) {
+            crop.harvest(harvestDate);
+            pointsAvailable += crop.getSize();
+            sownCrops.remove(crop);
 
-            history.add(vegetable);
-            history.sort(Comparator.comparing(Vegetable::getHarvestedDate));
+            history.add(crop);
+            history.sort(Comparator.comparing(Crop::getHarvestedDate));
         }
     }
 
-    List<Vegetable> getHistory() {
+    List<Crop> getHistory() {
         return Collections.unmodifiableList(history);
     }
 
-    public boolean isPastRotationPeriodFor(Vegetable target) {
+    public boolean isPastRotationPeriodFor(Crop target) {
         LocalDate rotationCutOffDate = LocalDate.now().minusYears(rotationPeriodInYears);
         return history.stream()
-                .filter(vegetable -> vegetable.isSameFamilyAs(target))
-                .allMatch(vegetable -> vegetable.wasHarvestedBefore(rotationCutOffDate));
+                .filter(crop -> crop.isSameFamilyAs(target))
+                .allMatch(crop -> crop.wasHarvestedBefore(rotationCutOffDate));
     }
 }

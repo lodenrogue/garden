@@ -11,18 +11,18 @@ class RotationTest {
 
     @Test
     void should_returnTrue_when_checkingBedThatHasNoHistoryIsPastRotationPeriod() {
-        Vegetable veg = new Vegetable("tomato", "nightshade", 16, 16);
+        Crop crop = new Crop("tomato", "nightshade", 16, 16);
         Bed bed = new Bed(1);
-        assertTrue(bed.isPastRotationPeriodFor(veg));
+        assertTrue(bed.isPastRotationPeriodFor(crop));
     }
 
     @Test
-    void should_returnTrue_when_checkingBedThatIsPastPeriodForGivenVegetable() {
+    void should_returnTrue_when_checkingBedThatIsPastPeriodForGivenCrop() {
         int rotationPeriod = 3;
 
         String family = "nightshade";
-        Vegetable firstHarvestedTomato = new Vegetable("tomato", family, 36, 16);
-        Vegetable secondHarvestedTomato = new Vegetable("tomato", family, 36, 16);
+        Crop firstHarvestedTomato = new Crop("tomato", family, 36, 16);
+        Crop secondHarvestedTomato = new Crop("tomato", family, 36, 16);
 
         LocalDate sowingDate = LocalDate.now().minusYears(rotationPeriod + 1);
         LocalDate harvestDate = sowingDate.plusDays(36);
@@ -34,17 +34,17 @@ class RotationTest {
         bed.harvest(firstHarvestedTomato, harvestDate);
         bed.harvest(secondHarvestedTomato, harvestDate);
 
-        Vegetable testVeg = new Vegetable("tomato", family, 36, 16);
-        assertTrue(bed.isPastRotationPeriodFor(testVeg));
+        Crop testCrop = new Crop("tomato", family, 36, 16);
+        assertTrue(bed.isPastRotationPeriodFor(testCrop));
     }
 
     @Test
-    void should_returnFalse_when_checkingBedThatIsNotPastPeriodForGivenVegetable() {
+    void should_returnFalse_when_checkingBedThatIsNotPastPeriodForGivenCrop() {
         int rotationPeriod = 3;
 
         String family = "nightshade";
-        Vegetable firstHarvestedTomato = new Vegetable("tomato", family, 36, 16);
-        Vegetable secondHarvestedTomato = new Vegetable("tomato", family, 36, 16);
+        Crop firstHarvestedTomato = new Crop("tomato", family, 36, 16);
+        Crop secondHarvestedTomato = new Crop("tomato", family, 36, 16);
 
         LocalDate sowingDate = LocalDate.now().minusYears(rotationPeriod - 1);
         LocalDate harvestDate = sowingDate.plusDays(36);
@@ -56,16 +56,16 @@ class RotationTest {
         bed.harvest(firstHarvestedTomato, harvestDate);
         bed.harvest(secondHarvestedTomato, harvestDate);
 
-        Vegetable testVeg = new Vegetable("tomato", family, 36, 16);
-        assertFalse(bed.isPastRotationPeriodFor(testVeg));
+        Crop testCrop = new Crop("tomato", family, 36, 16);
+        assertFalse(bed.isPastRotationPeriodFor(testCrop));
     }
 
     @Test
-    void should_returnTrue_when_checkingBedThatHasOtherHarvestedVegetablesButIsPastRotationPeriodForGivenVegetable() {
+    void should_returnTrue_when_checkingBedThatHasOtherHarvestedCropsButIsPastRotationPeriodForGivenCrop() {
         int rotationPeriod = 3;
 
-        Vegetable basil = new Vegetable("basil", "mint", 36, 4);
-        Vegetable corn = new Vegetable("corn", "grass", 36, 4);
+        Crop basil = new Crop("basil", "mint", 36, 4);
+        Crop corn = new Crop("corn", "grass", 36, 4);
 
         LocalDate sowingDate = LocalDate.now().minusYears(rotationPeriod - 1);
         LocalDate harvestDate = sowingDate.plusDays(36);
@@ -77,7 +77,7 @@ class RotationTest {
         bed.harvest(basil, harvestDate);
         bed.harvest(corn, harvestDate);
 
-        Vegetable testVeg = new Vegetable("tomato", "nightshade", 36, 16);
-        assertTrue(bed.isPastRotationPeriodFor(testVeg));
+        Crop testCrop = new Crop("tomato", "nightshade", 36, 16);
+        assertTrue(bed.isPastRotationPeriodFor(testCrop));
     }
 }

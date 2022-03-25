@@ -20,32 +20,32 @@ public class Bed {
         squares = createSquares(numOfSquares);
     }
 
-    public void sow(int square, Vegetable vegetable) {
-        sow(square, vegetable, LocalDate.now());
+    public void sow(int square, Crop crop) {
+        sow(square, crop, LocalDate.now());
     }
 
-    public void sow(int square, Vegetable vegetable, LocalDate sowingDate) {
-        squares.get(square).sow(vegetable, sowingDate);
+    public void sow(int square, Crop crop, LocalDate sowingDate) {
+        squares.get(square).sow(crop, sowingDate);
     }
 
-    public List<Vegetable> getSownVegetables(int square) {
-        return squares.get(square).getSownVegetables();
+    public List<Crop> getSownCrops(int square) {
+        return squares.get(square).getSownCrops();
     }
 
-    public List<Vegetable> getHistory(int square) {
+    public List<Crop> getHistory(int square) {
         return squares.get(square).getHistory();
     }
 
-    public void harvest(Vegetable vegetable) {
-        harvest(vegetable, LocalDate.now());
+    public void harvest(Crop crop) {
+        harvest(crop, LocalDate.now());
     }
 
-    public void harvest(Vegetable vegetable, LocalDate harvestDate) {
-        squares.forEach(square -> square.harvest(vegetable, harvestDate));
+    public void harvest(Crop crop, LocalDate harvestDate) {
+        squares.forEach(square -> square.harvest(crop, harvestDate));
     }
 
-    public boolean canSow(int square, Vegetable vegetable) {
-        return squares.get(square).canSow(vegetable);
+    public boolean canSow(int square, Crop crop) {
+        return squares.get(square).canSow(crop);
     }
 
     public int getNumberOfSquares() {
@@ -58,8 +58,8 @@ public class Bed {
                 .collect(Collectors.toList());
     }
 
-    public boolean isPastRotationPeriodFor(Vegetable vegetable) {
+    public boolean isPastRotationPeriodFor(Crop crop) {
         return squares.stream()
-                .allMatch(square -> square.isPastRotationPeriodFor(vegetable));
+                .allMatch(square -> square.isPastRotationPeriodFor(crop));
     }
 }

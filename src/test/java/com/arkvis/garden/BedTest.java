@@ -14,16 +14,16 @@ class BedTest {
     }
 
     @Test
-    void should_returnCorrectVegetables_when_gettingSownVegetablesFromDifferentSquares() {
-        Vegetable tomato = new Vegetable("tomato", "nightshade", 36, 16);
-        Vegetable corn = new Vegetable("corn", "grass", 45, 4);
+    void should_returnCorrectCrops_when_gettingSownCropsFromDifferentSquares() {
+        Crop tomato = new Crop("tomato", "nightshade", 36, 16);
+        Crop corn = new Crop("corn", "grass", 45, 4);
 
         Bed bed = new Bed(2);
         bed.sow(0, tomato);
         bed.sow(1, corn);
 
-        Vegetable sownTomato = bed.getSownVegetables(0).get(0);
-        Vegetable sownCorn = bed.getSownVegetables(1).get(0);
+        Crop sownTomato = bed.getSownCrops(0).get(0);
+        Crop sownCorn = bed.getSownCrops(1).get(0);
 
         assertEquals(tomato.getName(), sownTomato.getName());
         assertEquals(corn.getName(), sownCorn.getName());

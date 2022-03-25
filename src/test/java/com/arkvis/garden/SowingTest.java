@@ -10,9 +10,9 @@ import static org.junit.jupiter.api.Assertions.*;
 class SowingTest {
 
     @Test
-    void should_returnCorrectSowingDate_when_gettingSowingDateFromVegetableSownInTheFuture() {
+    void should_returnCorrectSowingDate_when_gettingSowingDateFromCropSownInTheFuture() {
         LocalDate sowingDate = LocalDate.now().plusDays(10);
-        Vegetable tomato = new Vegetable("tomato", "nightshade", 36, 16);
+        Crop tomato = new Crop("tomato", "nightshade", 36, 16);
 
         Bed bed = new Bed(1);
         bed.sow(0, tomato, sowingDate);
@@ -20,47 +20,47 @@ class SowingTest {
     }
 
     @Test
-    void should_returnCorrectSowingDate_when_gettingSowingDateFromVegetableInBedSownInTheFuture() {
+    void should_returnCorrectSowingDate_when_gettingSowingDateFromCropInBedSownInTheFuture() {
         LocalDate sowingDate = LocalDate.now().plusDays(10);
-        Vegetable tomato = new Vegetable("tomato", "nightshade", 36, 16);
+        Crop tomato = new Crop("tomato", "nightshade", 36, 16);
 
         Bed bed = new Bed(1);
         bed.sow(0, tomato, sowingDate);
 
-        List<Vegetable> vegetables = bed.getSownVegetables(0);
-        assertEquals(sowingDate, vegetables.get(0).getSowingDate());
+        List<Crop> crops = bed.getSownCrops(0);
+        assertEquals(sowingDate, crops.get(0).getSowingDate());
     }
 
     @Test
-    void should_returnCorrectSowingDate_when_gettingSowingDateFromVegetableSownNow() {
+    void should_returnCorrectSowingDate_when_gettingSowingDateFromCropSownNow() {
         Bed bed = new Bed(1);
-        Vegetable tomato = new Vegetable("tomato", "nightshade", 36, 16);
+        Crop tomato = new Crop("tomato", "nightshade", 36, 16);
 
         bed.sow(0, tomato);
         assertEquals(LocalDate.now(), tomato.getSowingDate());
     }
 
     @Test
-    void should_returnCorrectSowingDate_when_gettingSowingDateFromVegetableInBedSownNow() {
+    void should_returnCorrectSowingDate_when_gettingSowingDateFromCropInBedSownNow() {
         Bed bed = new Bed(1);
-        Vegetable tomato = new Vegetable("tomato", "nightshade", 36, 16);
+        Crop tomato = new Crop("tomato", "nightshade", 36, 16);
         bed.sow(0, tomato);
 
-        List<Vegetable> vegetables = bed.getSownVegetables(0);
-        assertEquals(LocalDate.now(), vegetables.get(0).getSowingDate());
+        List<Crop> crops = bed.getSownCrops(0);
+        assertEquals(LocalDate.now(), crops.get(0).getSowingDate());
     }
 
     @Test
     void should_returnTrue_when_checkingIfCanSowInSquareWithEnoughPoints() {
-        Vegetable tomato = new Vegetable("tomato", "nightshade", 36, 16);
+        Crop tomato = new Crop("tomato", "nightshade", 36, 16);
         Bed bed = new Bed(1);
         assertTrue(bed.canSow(0, tomato));
     }
 
     @Test
     void should_returnFalse_when_checkingIfCanSowInSquareWithNotEnoughPoints() {
-        Vegetable tomato = new Vegetable("tomato", "nightshade", 36, 16);
-        Vegetable corn = new Vegetable("tomato", "nightshade", 45, 4);
+        Crop tomato = new Crop("tomato", "nightshade", 36, 16);
+        Crop corn = new Crop("tomato", "nightshade", 45, 4);
 
         Bed bed = new Bed(1);
         bed.sow(0, tomato);
@@ -68,9 +68,9 @@ class SowingTest {
     }
 
     @Test
-    void should_returnTrue_when_checkingIfCanSowInSquareAfterVegetableHasBeenHarvested() {
-        Vegetable tomato = new Vegetable("tomato", "nightshade", 36, 16);
-        Vegetable kale = new Vegetable("kale", "cabbage", 40, 16);
+    void should_returnTrue_when_checkingIfCanSowInSquareAfterCropHasBeenHarvested() {
+        Crop tomato = new Crop("tomato", "nightshade", 36, 16);
+        Crop kale = new Crop("kale", "cabbage", 40, 16);
 
         Bed bed = new Bed(1);
         bed.sow(0, tomato);

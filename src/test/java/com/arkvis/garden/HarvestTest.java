@@ -11,19 +11,19 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class HarvestTest {
 
     @Test
-    void should_returnCorrectProjectedHarvestDate_when_sowingVegetable() {
+    void should_returnCorrectProjectedHarvestDate_when_sowingCrop() {
         int daysToHarvest = 36;
         LocalDate projectedHarvestDate = LocalDate.now().plusDays(daysToHarvest);
 
         Bed bed = new Bed(1);
-        bed.sow(0, new Vegetable("tomato", "nightshade", daysToHarvest, 16));
+        bed.sow(0, new Crop("tomato", "nightshade", daysToHarvest, 16));
 
-        Vegetable tomato = bed.getSownVegetables(0).get(0);
+        Crop tomato = bed.getSownCrops(0).get(0);
         assertEquals(projectedHarvestDate, tomato.getProjectedHarvestDate());
     }
 
     @Test
-    void should_returnCorrectProjectedHarvestDate_when_sowingMultipleVegetables() {
+    void should_returnCorrectProjectedHarvestDate_when_sowingMultipleCrops() {
         int basilDaysToHarvest = 36;
         LocalDate basilProjectedHarvestDate = LocalDate.now().plusDays(basilDaysToHarvest);
 
@@ -31,46 +31,46 @@ class HarvestTest {
         LocalDate cornProjectedHarvestDate = LocalDate.now().plusDays(cornDaysToHarvest);
 
         Bed bed = new Bed(1);
-        bed.sow(0, new Vegetable("basil", "mint", basilDaysToHarvest, 4));
-        bed.sow(0, new Vegetable("corn", "grass", cornDaysToHarvest, 4));
+        bed.sow(0, new Crop("basil", "mint", basilDaysToHarvest, 4));
+        bed.sow(0, new Crop("corn", "grass", cornDaysToHarvest, 4));
 
-        List<Vegetable> sownVegetables = bed.getSownVegetables(0);
-        VegetableFinder vegetableFinder = new VegetableFinder(sownVegetables);
+        List<Crop> sownCrops = bed.getSownCrops(0);
+        CropFinder cropFinder = new CropFinder(sownCrops);
 
-        Vegetable basil = vegetableFinder.findByName("basil");
-        Vegetable corn = vegetableFinder.findByName("corn");
+        Crop basil = cropFinder.findByName("basil");
+        Crop corn = cropFinder.findByName("corn");
 
         assertEquals(basilProjectedHarvestDate, basil.getProjectedHarvestDate());
         assertEquals(cornProjectedHarvestDate, corn.getProjectedHarvestDate());
     }
 
     @Test
-    void should_returnCorrectProjectedHarvestDate_when_sowingVegetableWithSowingDate() {
+    void should_returnCorrectProjectedHarvestDate_when_sowingCropWithSowingDate() {
         LocalDate sowingDate = LocalDate.now().plusDays(20);
         int daysToHarvest = 36;
 
         Bed bed = new Bed(1);
-        bed.sow(0, new Vegetable("tomato", "nightshade", daysToHarvest, 16), sowingDate);
+        bed.sow(0, new Crop("tomato", "nightshade", daysToHarvest, 16), sowingDate);
 
-        Vegetable tomato = bed.getSownVegetables(0).get(0);
+        Crop tomato = bed.getSownCrops(0).get(0);
         assertEquals(sowingDate.plusDays(daysToHarvest), tomato.getProjectedHarvestDate());
     }
 
     @Test
-    void should_notReturnAnyVegetables_when_gettingSownVegetablesFromBedThatHasBeenFullyHarvested() {
-        Vegetable tomato = new Vegetable("tomato", "nightshade", 36, 16);
+    void should_notReturnAnyCrops_when_gettingSownCropsFromBedThatHasBeenFullyHarvested() {
+        Crop tomato = new Crop("tomato", "nightshade", 36, 16);
 
         Bed bed = new Bed(1);
         bed.sow(0, tomato);
         bed.harvest(tomato);
 
-        List<Vegetable> sownVegetables = bed.getSownVegetables(0);
-        assertTrue(sownVegetables.isEmpty());
+        List<Crop> sownCrops = bed.getSownCrops(0);
+        assertTrue(sownCrops.isEmpty());
     }
 
     @Test
     void should_returnCorrectHarvestedDate_when_harvestingFromBed() {
-        Vegetable tomato = new Vegetable("tomato", "nightshade",36, 16);
+        Crop tomato = new Crop("tomato", "nightshade", 36, 16);
 
         Bed bed = new Bed(1);
         bed.sow(0, tomato);
@@ -82,7 +82,7 @@ class HarvestTest {
     @Test
     void should_returnCorrectHarvestedDate_when_harvestingFromBedWithGivenHarvestDate() {
         LocalDate harvestDate = LocalDate.now().minusDays(10);
-        Vegetable tomato = new Vegetable("tomato", "nightshade",36, 16);
+        Crop tomato = new Crop("tomato", "nightshade", 36, 16);
 
         Bed bed = new Bed(1);
         bed.sow(0, tomato);

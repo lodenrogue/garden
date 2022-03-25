@@ -2,7 +2,7 @@ package com.arkvis.garden;
 
 import java.time.LocalDate;
 
-public class Vegetable {
+public class Crop {
     private final String name;
     private final String family;
     private final int daysToHarvest;
@@ -11,7 +11,7 @@ public class Vegetable {
     private LocalDate sowingDate;
     private LocalDate harvestedDate;
 
-    public Vegetable(String name, String family, int daysToHarvest, int size) {
+    public Crop(String name, String family, int daysToHarvest, int size) {
         this.name = name;
         this.family = family;
         this.daysToHarvest = daysToHarvest;
@@ -54,7 +54,7 @@ public class Vegetable {
         return harvestedDate.isBefore(rotationDate);
     }
 
-    boolean isSameFamilyAs(Vegetable target) {
+    boolean isSameFamilyAs(Crop target) {
         return family.equals(target.getFamily());
     }
 }

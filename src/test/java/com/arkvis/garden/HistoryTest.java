@@ -13,38 +13,38 @@ class HistoryTest {
     @Test
     void should_returnEmptyHistory_when_gettingHistoryOfSquareWithNoHistory() {
         Bed bed = new Bed(1);
-        List<Vegetable> history = bed.getHistory(0);
+        List<Crop> history = bed.getHistory(0);
         assertTrue(history.isEmpty());
     }
 
     @Test
-    void should_returnEmptyHistory_when_gettingHistoryOfSquareWithNoVegetablesHarvested() {
+    void should_returnEmptyHistory_when_gettingHistoryOfSquareWithNoCropsHarvested() {
         Bed bed = new Bed(1);
-        bed.sow(0, new Vegetable("tomato", "nightshade", 36, 16));
+        bed.sow(0, new Crop("tomato", "nightshade", 36, 16));
 
-        List<Vegetable> history = bed.getHistory(0);
+        List<Crop> history = bed.getHistory(0);
         assertTrue(history.isEmpty());
     }
 
     @Test
-    void should_returnCorrectHistory_when_gettingHistoryOfSquareWithSingleVegetableHarvested() {
-        Vegetable tomato = new Vegetable("tomato", "nightshade", 36, 16);
+    void should_returnCorrectHistory_when_gettingHistoryOfSquareWithSingleCropHarvested() {
+        Crop tomato = new Crop("tomato", "nightshade", 36, 16);
 
         Bed bed = new Bed(1);
         bed.sow(0, tomato, LocalDate.now().plusDays(10));
         bed.harvest(tomato, LocalDate.now().plusDays(20));
 
-        List<Vegetable> history = bed.getHistory(0);
+        List<Crop> history = bed.getHistory(0);
         assertEquals(1, history.size());
 
-        Vegetable historicTomato = history.get(0);
+        Crop historicTomato = history.get(0);
         assertHistory(tomato, historicTomato);
     }
 
     @Test
-    void should_returnCorrectHistory_when_gettingHistoryOfSquareWithMultipleVegetablesHarvested() {
-        Vegetable basil = new Vegetable("basil", "mint", 36, 4);
-        Vegetable corn = new Vegetable("corn", "grass", 45, 4);
+    void should_returnCorrectHistory_when_gettingHistoryOfSquareWithMultipleCropsHarvested() {
+        Crop basil = new Crop("basil", "mint", 36, 4);
+        Crop corn = new Crop("corn", "grass", 45, 4);
 
         Bed bed = new Bed(1);
         bed.sow(0, basil, LocalDate.now().plusDays(10));
@@ -53,11 +53,11 @@ class HistoryTest {
         bed.harvest(basil);
         bed.harvest(corn);
 
-        List<Vegetable> history = bed.getHistory(0);
+        List<Crop> history = bed.getHistory(0);
         assertEquals(2, history.size());
 
-        Vegetable historicBasil = history.get(0);
-        Vegetable historyCorn = history.get(1);
+        Crop historicBasil = history.get(0);
+        Crop historyCorn = history.get(1);
 
         assertHistory(basil, historicBasil);
         assertHistory(corn, historyCorn);
@@ -65,8 +65,8 @@ class HistoryTest {
 
     @Test
     void should_returnCorrectHistory_when_gettingHistoryOfMultipleSquares() {
-        Vegetable basil = new Vegetable("basil", "mint", 36, 4);
-        Vegetable corn = new Vegetable("corn", "grass", 45, 4);
+        Crop basil = new Crop("basil", "mint", 36, 4);
+        Crop corn = new Crop("corn", "grass", 45, 4);
 
         Bed bed = new Bed(2);
         bed.sow(0, basil, LocalDate.now().plusDays(10));
@@ -75,8 +75,8 @@ class HistoryTest {
         bed.harvest(basil);
         bed.harvest(corn);
 
-        Vegetable historicBasil = bed.getHistory(0).get(0);
-        Vegetable historyCorn = bed.getHistory(1).get(0);
+        Crop historicBasil = bed.getHistory(0).get(0);
+        Crop historyCorn = bed.getHistory(1).get(0);
 
         assertHistory(basil, historicBasil);
         assertHistory(corn, historyCorn);
@@ -84,24 +84,24 @@ class HistoryTest {
 
     @Test
     void should_returnHistorySortedByHarvestDate_when_gettingHistory() {
-        Vegetable newestVeg = new Vegetable("New", "New", 16, 1);
-        Vegetable oldestVeg = new Vegetable("Old", "Old", 16, 1);
+        Crop newestCrop = new Crop("New", "New", 16, 1);
+        Crop oldestCrop = new Crop("Old", "Old", 16, 1);
 
         Bed bed = new Bed(1);
-        bed.sow(0, newestVeg);
-        bed.sow(0, oldestVeg);
+        bed.sow(0, newestCrop);
+        bed.sow(0, oldestCrop);
 
-        bed.harvest(newestVeg, LocalDate.now().plusDays(100));
-        bed.harvest(oldestVeg, LocalDate.now().plusDays(10));
+        bed.harvest(newestCrop, LocalDate.now().plusDays(100));
+        bed.harvest(oldestCrop, LocalDate.now().plusDays(10));
 
-        List<Vegetable> history = bed.getHistory(0);
-        assertHistory(oldestVeg, history.get(0));
-        assertHistory(newestVeg, history.get(1));
+        List<Crop> history = bed.getHistory(0);
+        assertHistory(oldestCrop, history.get(0));
+        assertHistory(newestCrop, history.get(1));
     }
 
-    private void assertHistory(Vegetable sownVegetable, Vegetable historyVegetable) {
-        assertEquals(sownVegetable.getName(), historyVegetable.getName());
-        assertEquals(sownVegetable.getSowingDate(), historyVegetable.getSowingDate());
-        assertEquals(sownVegetable.getHarvestedDate(), historyVegetable.getHarvestedDate());
+    private void assertHistory(Crop sownCrop, Crop historyCrop) {
+        assertEquals(sownCrop.getName(), historyCrop.getName());
+        assertEquals(sownCrop.getSowingDate(), historyCrop.getSowingDate());
+        assertEquals(sownCrop.getHarvestedDate(), historyCrop.getHarvestedDate());
     }
 }

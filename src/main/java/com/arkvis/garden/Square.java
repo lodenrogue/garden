@@ -7,11 +7,13 @@ import java.util.Comparator;
 import java.util.List;
 
 class Square {
+    private final int rotationPeriodInYears;
     private final List<Vegetable> sownVegetables;
     private final List<Vegetable> history;
     private int pointsAvailable = 16;
 
-    Square() {
+    Square(int rotationPeriodInYears) {
+        this.rotationPeriodInYears = rotationPeriodInYears;
         sownVegetables = new ArrayList<>();
         history = new ArrayList<>();
     }
@@ -45,5 +47,12 @@ class Square {
 
     List<Vegetable> getHistory() {
         return Collections.unmodifiableList(history);
+    }
+
+    public boolean isPastRotationPeriodFor(Vegetable target) {
+        LocalDate rotationCutOffDate = LocalDate.now().minusYears(rotationPeriodInYears);
+        return history.stream()
+                .filter(vegetable -> vegetable.isSameFamilyAs(target))
+                .allMatch(vegetable -> vegetable.wasHarvestedBefore(rotationCutOffDate));
     }
 }

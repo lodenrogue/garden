@@ -15,8 +15,8 @@ class BedTest {
 
     @Test
     void should_returnCorrectVegetables_when_gettingSownVegetablesFromDifferentSquares() {
-        Vegetable tomato = new Vegetable("tomato", 36, 16);
-        Vegetable corn = new Vegetable("corn", 45, 4);
+        Vegetable tomato = new Vegetable("tomato", "nightshade", 36, 16);
+        Vegetable corn = new Vegetable("corn", "grass", 45, 4);
 
         Bed bed = new Bed(2);
         bed.sow(0, tomato);

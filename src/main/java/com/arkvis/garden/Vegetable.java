@@ -4,14 +4,16 @@ import java.time.LocalDate;
 
 public class Vegetable {
     private final String name;
+    private final String family;
     private final int daysToHarvest;
     private final int size;
 
     private LocalDate sowingDate;
     private LocalDate harvestedDate;
 
-    public Vegetable(String name, int daysToHarvest, int size) {
+    public Vegetable(String name, String family, int daysToHarvest, int size) {
         this.name = name;
+        this.family = family;
         this.daysToHarvest = daysToHarvest;
         this.size = size;
     }
@@ -42,5 +44,17 @@ public class Vegetable {
 
     int getSize() {
         return size;
+    }
+
+    boolean wasHarvestedBefore(LocalDate rotationDate) {
+        return harvestedDate.isBefore(rotationDate);
+    }
+
+    boolean isSameFamilyAs(Vegetable target) {
+        return family.equals(target.getFamily());
+    }
+
+    private String getFamily() {
+        return family;
     }
 }

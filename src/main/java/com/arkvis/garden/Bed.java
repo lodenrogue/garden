@@ -1,15 +1,22 @@
 package com.arkvis.garden;
 
 import java.time.LocalDate;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class Bed {
+    private static final int DEFAULT_ROTATION_PERIOD_IN_YEARS = 3;
+
+    private final int rotationPeriodInYears;
     private final List<Square> squares;
 
     public Bed(int numOfSquares) {
+        this(numOfSquares, DEFAULT_ROTATION_PERIOD_IN_YEARS);
+    }
+
+    public Bed(int numOfSquares, int rotationPeriodInYears) {
+        this.rotationPeriodInYears = rotationPeriodInYears;
         squares = createSquares(numOfSquares);
     }
 
@@ -47,7 +54,12 @@ public class Bed {
 
     private List<Square> createSquares(int numOfSquares) {
         return IntStream.range(0, numOfSquares)
-                .mapToObj(i -> new Square())
+                .mapToObj(i -> new Square(rotationPeriodInYears))
                 .collect(Collectors.toList());
+    }
+
+    public boolean isPastRotationPeriodFor(Vegetable vegetable) {
+        return squares.stream()
+                .allMatch(square -> square.isPastRotationPeriodFor(vegetable));
     }
 }

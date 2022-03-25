@@ -20,7 +20,7 @@ class HistoryTest {
     @Test
     void should_returnEmptyHistory_when_gettingHistoryOfSquareWithNoVegetablesHarvested() {
         Bed bed = new Bed(1);
-        bed.sow(0, new Vegetable("tomato", 36, 16));
+        bed.sow(0, new Vegetable("tomato", "nightshade", 36, 16));
 
         List<Vegetable> history = bed.getHistory(0);
         assertTrue(history.isEmpty());
@@ -28,7 +28,7 @@ class HistoryTest {
 
     @Test
     void should_returnCorrectHistory_when_gettingHistoryOfSquareWithSingleVegetableHarvested() {
-        Vegetable tomato = new Vegetable("tomato", 36, 16);
+        Vegetable tomato = new Vegetable("tomato", "nightshade", 36, 16);
 
         Bed bed = new Bed(1);
         bed.sow(0, tomato, LocalDate.now().plusDays(10));
@@ -43,8 +43,8 @@ class HistoryTest {
 
     @Test
     void should_returnCorrectHistory_when_gettingHistoryOfSquareWithMultipleVegetablesHarvested() {
-        Vegetable basil = new Vegetable("basil", 36, 4);
-        Vegetable corn = new Vegetable("corn", 45, 4);
+        Vegetable basil = new Vegetable("basil", "mint", 36, 4);
+        Vegetable corn = new Vegetable("corn", "grass", 45, 4);
 
         Bed bed = new Bed(1);
         bed.sow(0, basil, LocalDate.now().plusDays(10));
@@ -65,8 +65,8 @@ class HistoryTest {
 
     @Test
     void should_returnCorrectHistory_when_gettingHistoryOfMultipleSquares() {
-        Vegetable basil = new Vegetable("basil", 36, 4);
-        Vegetable corn = new Vegetable("corn", 45, 4);
+        Vegetable basil = new Vegetable("basil", "mint", 36, 4);
+        Vegetable corn = new Vegetable("corn", "grass", 45, 4);
 
         Bed bed = new Bed(2);
         bed.sow(0, basil, LocalDate.now().plusDays(10));
@@ -84,8 +84,8 @@ class HistoryTest {
 
     @Test
     void should_returnHistorySortedByHarvestDate_when_gettingHistory() {
-        Vegetable newestVeg = new Vegetable("New", 16, 1);
-        Vegetable oldestVeg = new Vegetable("Old", 16, 1);
+        Vegetable newestVeg = new Vegetable("New", "New", 16, 1);
+        Vegetable oldestVeg = new Vegetable("Old", "Old", 16, 1);
 
         Bed bed = new Bed(1);
         bed.sow(0, newestVeg);

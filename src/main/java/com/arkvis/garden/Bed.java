@@ -44,8 +44,8 @@ public class Bed {
         squares.forEach(square -> square.harvest(crop, harvestDate));
     }
 
-    public boolean canSow(int square, Crop crop) {
-        return squares.get(square).canSow(crop);
+    public boolean hasSpaceToSow(int square, Crop crop) {
+        return squares.get(square).hasSpaceToSow(crop);
     }
 
     public int getNumberOfSquares() {

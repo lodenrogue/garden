@@ -67,7 +67,7 @@ per square foot.
 
 ``` java
 int square = 0;
-boolean canSow = bed.canSow(square, crop);
+boolean canSow = bed.hasSpaceToSow(square, crop);
 ```
 
 ### Harvesting a crop

@@ -54,7 +54,7 @@ class SowingTest {
     void should_returnTrue_when_checkingIfCanSowInSquareWithEnoughPoints() {
         Crop tomato = new Crop("tomato", "nightshade", 36, 16);
         Bed bed = new Bed(1);
-        assertTrue(bed.canSow(0, tomato));
+        assertTrue(bed.hasSpaceToSow(0, tomato));
     }
 
     @Test
@@ -64,7 +64,7 @@ class SowingTest {
 
         Bed bed = new Bed(1);
         bed.sow(0, tomato);
-        assertFalse(bed.canSow(0, corn));
+        assertFalse(bed.hasSpaceToSow(0, corn));
     }
 
     @Test
@@ -76,6 +76,6 @@ class SowingTest {
         bed.sow(0, tomato);
         bed.harvest(tomato);
 
-        assertTrue(bed.canSow(0, kale));
+        assertTrue(bed.hasSpaceToSow(0, kale));
     }
 }

@@ -19,7 +19,7 @@ class Square {
     }
 
     void sow(Crop crop, LocalDate sowingDate) {
-        if (canSow(crop)) {
+        if (hasSpaceToSow(crop)) {
             crop.sow(sowingDate);
             pointsAvailable -= crop.getSize();
             sownCrops.add(crop);
@@ -30,7 +30,7 @@ class Square {
         return Collections.unmodifiableList(sownCrops);
     }
 
-    boolean canSow(Crop crop) {
+    boolean hasSpaceToSow(Crop crop) {
         return pointsAvailable - crop.getSize() >= 0;
     }
 

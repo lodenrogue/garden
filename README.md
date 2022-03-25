@@ -5,6 +5,10 @@
 ``` java
 int numberOfSquares = 10;
 Bed bed = new Bed(numberOfSquares);
+
+// Or with a given rotation period. Default is 3 years
+int rotationPeriodInYears = 4;
+Bed bed = new Bed(numberOfSquares, rotationPeriodInYears);
 ```
 
 ### Sowing a vegetable
@@ -15,10 +19,11 @@ which equals 16.
 
 ``` java
 String name = "tomato";
+String family = "nightshade";
 int daysToHarvest = 60;
 int size = 16;
 
-Vegetable tomato = new Vegetable(name, daysToHarvest, size);
+Vegetable tomato = new Vegetable(name, family, daysToHarvest, size);
 int squareToSow = 0;
 
 // Sow now
@@ -87,6 +92,12 @@ History is sorted oldest harvested vegetable first.
 
 ``` java
 List<Vegetable> history = bed.getHistory(square);
+```
+
+### Checking whether a bed is past a rotation period for a given vegetable
+
+``` java
+boolean isPastRotationPeriod = bed.isPastRotationPeriodFor(vegetable);
 ```
 
 ### Getting number of squares in bed

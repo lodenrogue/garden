@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class Bed {
-    private static final int DEFAULT_ROTATION_PERIOD_IN_YEARS = 3;
+    public static final int DEFAULT_ROTATION_PERIOD_IN_YEARS = 3;
 
     private final int rotationPeriodInYears;
     private final List<Square> squares;

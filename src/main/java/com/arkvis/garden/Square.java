@@ -49,7 +49,7 @@ class Square {
         return Collections.unmodifiableList(history);
     }
 
-    public boolean isPastRotationPeriodFor(Crop target) {
+    boolean isPastRotationPeriodFor(Crop target) {
         LocalDate rotationCutOffDate = LocalDate.now().minusYears(rotationPeriodInYears);
         return history.stream()
                 .filter(crop -> crop.isSameFamilyAs(target))

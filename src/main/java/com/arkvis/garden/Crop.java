@@ -22,16 +22,16 @@ public class Crop {
         return name;
     }
 
-    private String getFamily() {
+    public String getFamily() {
         return family;
-    }
-
-    public LocalDate getProjectedHarvestDate() {
-        return sowingDate.plusDays(daysToHarvest);
     }
 
     public LocalDate getSowingDate() {
         return sowingDate;
+    }
+
+    public LocalDate getProjectedHarvestDate() {
+        return sowingDate.plusDays(daysToHarvest);
     }
 
     public LocalDate getHarvestedDate() {

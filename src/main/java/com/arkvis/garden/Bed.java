@@ -7,7 +7,6 @@ import java.util.stream.IntStream;
 
 public class Bed {
     public static final int DEFAULT_ROTATION_PERIOD_IN_YEARS = 3;
-
     private final int rotationPeriodInYears;
     private final List<Square> squares;
 
@@ -52,14 +51,14 @@ public class Bed {
         return squares.size();
     }
 
+    public boolean isPastRotationPeriodFor(Crop crop) {
+        return squares.stream()
+                .allMatch(square -> square.isPastRotationPeriodFor(crop));
+    }
+
     private List<Square> createSquares(int numOfSquares) {
         return IntStream.range(0, numOfSquares)
                 .mapToObj(i -> new Square(rotationPeriodInYears))
                 .collect(Collectors.toList());
-    }
-
-    public boolean isPastRotationPeriodFor(Crop crop) {
-        return squares.stream()
-                .allMatch(square -> square.isPastRotationPeriodFor(crop));
     }
 }

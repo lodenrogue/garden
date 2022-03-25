@@ -22,6 +22,10 @@ public class Vegetable {
         return name;
     }
 
+    private String getFamily() {
+        return family;
+    }
+
     public LocalDate getProjectedHarvestDate() {
         return sowingDate.plusDays(daysToHarvest);
     }
@@ -52,9 +56,5 @@ public class Vegetable {
 
     boolean isSameFamilyAs(Vegetable target) {
         return family.equals(target.getFamily());
-    }
-
-    private String getFamily() {
-        return family;
     }
 }

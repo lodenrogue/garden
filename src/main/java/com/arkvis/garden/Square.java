@@ -37,7 +37,7 @@ class Square {
         return pointsAvailable - crop.getSize() >= 0;
     }
 
-    boolean harvest(Crop crop, LocalDate harvestDate) {
+    void harvest(Crop crop, LocalDate harvestDate) {
         if (sownCrops.contains(crop)) {
             crop.harvest(harvestDate);
             pointsAvailable += crop.getSize();
@@ -45,9 +45,7 @@ class Square {
 
             history.add(crop);
             history.sort(Comparator.comparing(Crop::getHarvestedDate));
-            return true;
         }
-        return false;
     }
 
     List<Crop> getHistory() {

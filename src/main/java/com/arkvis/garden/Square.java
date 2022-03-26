@@ -23,6 +23,9 @@ class Square {
             crop.sow(sowingDate);
             pointsAvailable -= crop.getSize();
             sownCrops.add(crop);
+        } else {
+            String message = String.format("Not enough space to sow crop in square. %s points available.", pointsAvailable);
+            throw new NotEnoughSpaceException(message);
         }
     }
 

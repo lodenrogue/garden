@@ -78,4 +78,14 @@ class SowingTest {
 
         assertTrue(bed.hasSpaceToSow(0, kale));
     }
+
+    @Test
+    void should_throwException_when_sowingButNotEnoughPointsInSquare() {
+        Crop tomato = new Crop("tomato", "nightshade", 36, 16);
+        Bed bed = new Bed(1);
+        bed.sow(0, tomato);
+
+        Crop testCrop = new Crop("tomato", "nightshade", 36, 16);
+        assertThrows(NotEnoughSpaceException.class, () -> bed.sow(0, testCrop));
+    }
 }

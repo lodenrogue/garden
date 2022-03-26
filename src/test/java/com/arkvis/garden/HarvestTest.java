@@ -5,8 +5,7 @@ import org.junit.jupiter.api.Test;
 import java.time.LocalDate;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 class HarvestTest {
 
@@ -89,5 +88,11 @@ class HarvestTest {
 
         bed.harvest(tomato, harvestDate);
         assertEquals(harvestDate, tomato.getHarvestedDate());
+    }
+
+    @Test
+    void should_throwException_when_gettingProjectedHarvestDateOfCropThatHasNotBeenSown() {
+        Crop crop = new Crop("tomato", "nightshade", 36, 16);
+        assertThrows(IllegalStateException.class, crop::getProjectedHarvestDate);
     }
 }

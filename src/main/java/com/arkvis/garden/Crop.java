@@ -31,6 +31,9 @@ public class Crop {
     }
 
     public LocalDate getProjectedHarvestDate() {
+        if (sowingDate == null) {
+            throw new IllegalStateException("Crop has not been sown. Projected harvest date cannot be calculated");
+        }
         return sowingDate.plusDays(daysToHarvest);
     }
 

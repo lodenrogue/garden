@@ -58,17 +58,17 @@ public class Bed {
                 .allMatch(square -> square.isPastRotationPeriodFor(crop));
     }
 
-    private List<Square> createSquares(int numOfSquares) {
-        return IntStream.range(0, numOfSquares)
-                .mapToObj(i -> new Square(rotationPeriodInYears))
-                .collect(Collectors.toList());
-    }
-
     public LocalDate getRotationEndDateFor(Crop crop) {
         return squares.stream()
                 .map(square -> square.getRotationEndDateFor(crop))
                 .filter(Objects::nonNull)
                 .max(Comparator.naturalOrder())
                 .orElse(null);
+    }
+
+    private List<Square> createSquares(int numOfSquares) {
+        return IntStream.range(0, numOfSquares)
+                .mapToObj(i -> new Square(rotationPeriodInYears))
+                .collect(Collectors.toList());
     }
 }

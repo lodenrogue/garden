@@ -55,4 +55,13 @@ class Square {
                 .filter(crop -> crop.isSameFamilyAs(target))
                 .allMatch(crop -> crop.wasHarvestedBefore(rotationCutOffDate));
     }
+
+    public LocalDate getRotationEndDateFor(Crop target) {
+        return history.stream()
+                .filter(crop -> crop.isSameFamilyAs(target))
+                .map(Crop::getHarvestedDate)
+                .max(Comparator.naturalOrder())
+                .map(date -> date.plusYears(rotationPeriodInYears))
+                .orElse(null);
+    }
 }

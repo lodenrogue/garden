@@ -1,7 +1,9 @@
 package com.arkvis.garden;
 
 import java.time.LocalDate;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -60,5 +62,13 @@ public class Bed {
         return IntStream.range(0, numOfSquares)
                 .mapToObj(i -> new Square(rotationPeriodInYears))
                 .collect(Collectors.toList());
+    }
+
+    public LocalDate getRotationEndDateFor(Crop crop) {
+        return squares.stream()
+                .map(square -> square.getRotationEndDateFor(crop))
+                .filter(Objects::nonNull)
+                .max(Comparator.naturalOrder())
+                .orElse(null);
     }
 }

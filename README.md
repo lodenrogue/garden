@@ -11,6 +11,12 @@ int rotationPeriodInYears = 4;
 Bed bed = new Bed(numberOfSquares, rotationPeriodInYears);
 ```
 
+### Getting number of squares in bed
+
+``` java
+int numOfSquares = bed.getNumberOfSquares();
+```
+
 ### Sowing a crop
 
 Since we're using the square foot gardening method size should be 16 divided by how many of that crop we can sow in a
@@ -96,12 +102,17 @@ List<Crop> history = bed.getHistory(square);
 
 ### Checking whether a bed is past a rotation period for a given crop
 
+Return true if the rotation period has passed since the last harvest of this crop's family.
+
 ``` java
 boolean isPastRotationPeriod = bed.isPastRotationPeriodFor(crop);
 ```
 
-### Getting number of squares in bed
+### Getting rotation end date for a given crop
+
+Returns an optional of the end date of the current rotation period for a given crop's family. If there is no history for
+a given crop's family then null is returned.
 
 ``` java
-int numOfSquares = bed.getNumberOfSquares();
+LocalDate rotationEndDate = bed.getRotationEndDateFor(crop);
 ```

@@ -17,6 +17,10 @@ public class Bed {
     }
 
     public Bed(int numOfSquares, int rotationPeriodInYears) {
+        if (numOfSquares <= 0) {
+            String message = "Number of squares must be greater than 0 when creating bed";
+            throw new IllegalArgumentException(message);
+        }
         this.rotationPeriodInYears = rotationPeriodInYears;
         squares = createSquares(numOfSquares);
     }
@@ -43,11 +47,13 @@ public class Bed {
 
     public void harvest(Crop crop, LocalDate harvestDate) {
         if (Objects.nonNull(crop.getHarvestedDate())) {
-            throw new IllegalStateException("Attempted to harvest crop that has already been harvested");
+            String message = "Attempted to harvest crop that has already been harvested";
+            throw new IllegalStateException(message);
         }
 
         if (Objects.isNull(crop.getSowingDate())) {
-            throw new IllegalStateException("Attempted to harvest crop that has not been sown");
+            String message = "Attempted to harvest crop that has not been sown";
+            throw new IllegalStateException(message);
         }
         squares.forEach(square -> square.harvest(crop, harvestDate));
     }

@@ -3,6 +3,7 @@ package com.arkvis.garden;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class BedTest {
 
@@ -27,5 +28,15 @@ class BedTest {
 
         assertEquals(tomato.getName(), sownTomato.getName());
         assertEquals(corn.getName(), sownCorn.getName());
+    }
+
+    @Test
+    void should_throwException_when_creatingBedWithNoSquares() {
+        assertThrows(IllegalArgumentException.class, () -> new Bed(0));
+    }
+
+    @Test
+    void should_throwException_when_creatingBedWithNegativeNumberSquares() {
+        assertThrows(IllegalArgumentException.class, () -> new Bed(-1));
     }
 }

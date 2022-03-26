@@ -42,7 +42,10 @@ public class Bed {
     }
 
     public void harvest(Crop crop, LocalDate harvestDate) {
-        squares.forEach(square -> square.harvest(crop, harvestDate));
+        squares.stream()
+                .filter(square -> square.harvest(crop, harvestDate))
+                .findAny()
+                .orElseThrow(() -> new IllegalStateException("Crop was not harvested. Make sure it was sown first"));
     }
 
     public boolean hasSpaceToSow(int square, Crop crop) {

@@ -95,4 +95,11 @@ class HarvestTest {
         Crop crop = new Crop("tomato", "nightshade", 36, 16);
         assertThrows(IllegalStateException.class, crop::getProjectedHarvestDate);
     }
+
+    @Test
+    void should_throwException_when_harvestingCropThatHasNotBeenSown() {
+        Crop tomato = new Crop("tomato", "nightshade", 36, 16);
+        Bed bed = new Bed(1);
+        assertThrows(IllegalStateException.class, () -> bed.harvest(tomato));
+    }
 }

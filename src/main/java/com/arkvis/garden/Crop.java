@@ -33,13 +33,32 @@ public class Crop {
 
     public LocalDate getProjectedHarvestDate() {
         if (Objects.isNull(sowingDate)) {
-            throw new IllegalStateException("Crop has not been sown. Projected harvest date cannot be calculated");
+            String message = "Crop has not been sown. Projected harvest date cannot be calculated";
+            throw new IllegalStateException(message);
         }
         return sowingDate.plusDays(daysToHarvest);
     }
 
     public LocalDate getHarvestedDate() {
         return harvestedDate;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Crop crop = (Crop) o;
+        return daysToHarvest == crop.daysToHarvest
+                && size == crop.size
+                && name.equals(crop.name)
+                && family.equals(crop.family)
+                && Objects.equals(sowingDate, crop.sowingDate)
+                && Objects.equals(harvestedDate, crop.harvestedDate);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, family, daysToHarvest, size, sowingDate, harvestedDate);
     }
 
     void sow(LocalDate sowingDate) {

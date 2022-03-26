@@ -85,6 +85,19 @@ public class Bed {
                 .orElse(null);
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Bed bed = (Bed) o;
+        return rotationPeriodInYears == bed.rotationPeriodInYears && squares.equals(bed.squares);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(rotationPeriodInYears, squares);
+    }
+
     private List<Square> createSquares(int numOfSquares) {
         return IntStream.range(0, numOfSquares)
                 .mapToObj(i -> new Square(rotationPeriodInYears))

@@ -1,10 +1,7 @@
 package com.arkvis.garden;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 class Square {
     private final int rotationPeriodInYears;
@@ -66,5 +63,18 @@ class Square {
                 .max(Comparator.naturalOrder())
                 .map(date -> date.plusYears(rotationPeriodInYears))
                 .orElse(null);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Square square = (Square) o;
+        return rotationPeriodInYears == square.rotationPeriodInYears && pointsAvailable == square.pointsAvailable && sownCrops.equals(square.sownCrops) && history.equals(square.history);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(rotationPeriodInYears, sownCrops, history, pointsAvailable);
     }
 }

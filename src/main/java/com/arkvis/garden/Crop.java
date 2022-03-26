@@ -1,6 +1,7 @@
 package com.arkvis.garden;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 public class Crop {
     private final String name;
@@ -31,7 +32,7 @@ public class Crop {
     }
 
     public LocalDate getProjectedHarvestDate() {
-        if (sowingDate == null) {
+        if (Objects.isNull(sowingDate)) {
             throw new IllegalStateException("Crop has not been sown. Projected harvest date cannot be calculated");
         }
         return sowingDate.plusDays(daysToHarvest);
@@ -42,6 +43,10 @@ public class Crop {
     }
 
     void sow(LocalDate sowingDate) {
+        if (Objects.nonNull(this.sowingDate)) {
+            String message = String.format("Crop was already sown on %s", sowingDate);
+            throw new IllegalStateException(message);
+        }
         this.sowingDate = sowingDate;
     }
 

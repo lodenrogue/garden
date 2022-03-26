@@ -88,4 +88,13 @@ class SowingTest {
         Crop testCrop = new Crop("tomato", "nightshade", 36, 16);
         assertThrows(NotEnoughSpaceException.class, () -> bed.sow(0, testCrop));
     }
+
+    @Test
+    void should_throwException_when_sowingCropThatHasAlreadyBeenSown() {
+        Crop tomato = new Crop("tomato", "nightshade", 36, 16);
+        Bed bed = new Bed(2);
+
+        bed.sow(0, tomato);
+        assertThrows(IllegalStateException.class, () -> bed.sow(1, tomato));
+    }
 }

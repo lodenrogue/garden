@@ -39,4 +39,9 @@ class BedTest {
     void should_throwException_when_creatingBedWithNegativeNumberSquares() {
         assertThrows(IllegalArgumentException.class, () -> new Bed(-1));
     }
+
+    @Test
+    void should_throwException_when_creatingBedWithNegativeRotationPeriod() {
+        assertThrows(IllegalArgumentException.class, () -> new Bed(1, -1));
+    }
 }

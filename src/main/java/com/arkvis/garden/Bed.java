@@ -17,10 +17,16 @@ public class Bed {
     }
 
     public Bed(int numOfSquares, int rotationPeriodInYears) {
+        if (rotationPeriodInYears < 0) {
+            String message = "Rotation period in years must be greater than or equal to 0";
+            throw new IllegalArgumentException(message);
+        }
+
         if (numOfSquares <= 0) {
             String message = "Number of squares must be greater than 0 when creating bed";
             throw new IllegalArgumentException(message);
         }
+
         this.rotationPeriodInYears = rotationPeriodInYears;
         squares = createSquares(numOfSquares);
     }

@@ -102,4 +102,14 @@ class HarvestTest {
         Bed bed = new Bed(1);
         assertThrows(IllegalStateException.class, () -> bed.harvest(tomato));
     }
+
+    @Test
+    void should_throwException_when_harvestingCropThatHasAlreadyBeenHarvested() {
+        Crop tomato = new Crop("tomato", "nightshade", 36, 16);
+        Bed bed = new Bed(1);
+        bed.sow(0, tomato);
+
+        bed.harvest(tomato);
+        assertThrows(IllegalStateException.class, () -> bed.harvest(tomato));
+    }
 }

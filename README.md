@@ -110,7 +110,7 @@ boolean isPastRotationPeriod = bed.isPastRotationPeriodFor(crop);
 
 ### Getting rotation end date for a given crop
 
-Returns an optional of the end date of the current rotation period for a given crop's family. If there is no history for
+Returns the end date of the current rotation period for a given crop's family. If there is no history for
 a given crop's family then null is returned.
 
 ``` java

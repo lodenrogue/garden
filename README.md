@@ -110,9 +110,21 @@ boolean isPastRotationPeriod = bed.isPastRotationPeriodFor(crop);
 
 ### Getting rotation end date for a given crop
 
-Returns the end date of the current rotation period for a given crop's family. If there is no history for
-a given crop's family then null is returned.
+Returns the end date of the current rotation period for a given crop's family. If there is no history for a given crop's
+family then null is returned.
 
 ``` java
 LocalDate rotationEndDate = bed.getRotationEndDateFor(crop);
+```
+
+### Saving and loading a bed
+
+``` java
+String fileName = "bed.json";
+
+SaveStrategy saveStrategy = new JsonFileSaveStrategy(fileName);
+saveStrategy.save(bed);
+
+LoadStrategy loadStrategy = new JsonFileLoadStrategy(fileName);
+Bed loadedBed = loadStrategy.load();
 ```

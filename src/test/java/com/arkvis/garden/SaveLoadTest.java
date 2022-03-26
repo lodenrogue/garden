@@ -11,9 +11,10 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
-class SavingTest {
-    private static final Logger logger = LoggerFactory.getLogger(SavingTest.class);
+class SaveLoadTest {
+    private static final Logger logger = LoggerFactory.getLogger(SaveLoadTest.class);
     private static final String FILE_NAME = "bed.json";
 
     @BeforeEach
@@ -42,6 +43,11 @@ class SavingTest {
         Bed loadedBed = new JsonFileLoadStrategy(FILE_NAME).load();
 
         assertEquals(savedBed, loadedBed);
+    }
+
+    @Test
+    void should_throwException_when_loadingBedFromFileThatDoesNotExist() {
+        assertThrows(RuntimeException.class, () -> new JsonFileLoadStrategy(FILE_NAME).load());
     }
 
     private void deleteTestFile() {

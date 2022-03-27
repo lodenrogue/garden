@@ -15,6 +15,19 @@ class Square {
         history = new ArrayList<>();
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Square square = (Square) o;
+        return rotationPeriodInYears == square.rotationPeriodInYears && pointsAvailable == square.pointsAvailable && sownCrops.equals(square.sownCrops) && history.equals(square.history);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(rotationPeriodInYears, sownCrops, history, pointsAvailable);
+    }
+
     void sow(Crop crop, LocalDate sowingDate) {
         if (hasSpaceToSow(crop)) {
             crop.sow(sowingDate);
@@ -56,7 +69,7 @@ class Square {
                 .allMatch(crop -> crop.wasHarvestedBefore(rotationCutOffDate));
     }
 
-    public LocalDate getRotationEndDateFor(Crop target) {
+    LocalDate getRotationEndDateFor(Crop target) {
         return history.stream()
                 .filter(crop -> crop.isSameFamilyAs(target))
                 .map(Crop::getHarvestedDate)
@@ -65,25 +78,12 @@ class Square {
                 .orElse(null);
     }
 
-    public void remove(Crop crop) {
+    void remove(Crop crop) {
         if (sownCrops.contains(crop)) {
             pointsAvailable += crop.getSize();
             sownCrops.remove(crop);
         } else {
             history.remove(crop);
         }
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Square square = (Square) o;
-        return rotationPeriodInYears == square.rotationPeriodInYears && pointsAvailable == square.pointsAvailable && sownCrops.equals(square.sownCrops) && history.equals(square.history);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(rotationPeriodInYears, sownCrops, history, pointsAvailable);
     }
 }

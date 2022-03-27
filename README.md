@@ -117,6 +117,14 @@ family then null is returned.
 LocalDate rotationEndDate = bed.getRotationEndDateFor(crop);
 ```
 
+### Removing a crop
+
+We may want to remove a crop from sown crops or history
+
+``` java
+bed.remove(crop);
+```
+
 ### Saving and loading a bed
 
 ``` java

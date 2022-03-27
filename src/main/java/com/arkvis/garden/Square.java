@@ -65,6 +65,15 @@ class Square {
                 .orElse(null);
     }
 
+    public void remove(Crop crop) {
+        if (sownCrops.contains(crop)) {
+            pointsAvailable += crop.getSize();
+            sownCrops.remove(crop);
+        } else {
+            history.remove(crop);
+        }
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

@@ -60,7 +60,7 @@ class RotationTest {
     }
 
     @Test
-    void should_returnTrue_when_checkingBedThatHasOtherHarvestedCropsButIsPastRotationPeriodForGivenCrop() {
+    void should_returnTrue_when_checkingBedThatHasOtherHarvestedCropFamiliesAndIsPastRotationPeriodForGivenCrop() {
         int rotationPeriod = 3;
 
         Crop basil = new Crop("basil", "mint", 36, 4);

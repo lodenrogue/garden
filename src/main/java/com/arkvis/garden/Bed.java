@@ -31,12 +31,20 @@ public class Bed {
         squares = createSquares(numOfSquares);
     }
 
+    public int getNumberOfSquares() {
+        return squares.size();
+    }
+
     public void sow(int square, Crop crop) {
         sow(square, crop, LocalDate.now());
     }
 
     public void sow(int square, Crop crop, LocalDate sowingDate) {
         squares.get(square).sow(crop, sowingDate);
+    }
+
+    public boolean hasSpaceToSow(int square, Crop crop) {
+        return squares.get(square).hasSpaceToSow(crop);
     }
 
     public List<Crop> getSownCrops(int square) {
@@ -64,14 +72,6 @@ public class Bed {
         squares.forEach(square -> square.harvest(crop, harvestDate));
     }
 
-    public boolean hasSpaceToSow(int square, Crop crop) {
-        return squares.get(square).hasSpaceToSow(crop);
-    }
-
-    public int getNumberOfSquares() {
-        return squares.size();
-    }
-
     public boolean isPastRotationPeriodFor(Crop crop) {
         return squares.stream()
                 .allMatch(square -> square.isPastRotationPeriodFor(crop));
@@ -83,6 +83,10 @@ public class Bed {
                 .filter(Objects::nonNull)
                 .max(Comparator.naturalOrder())
                 .orElse(null);
+    }
+
+    public void remove(Crop crop) {
+        squares.forEach(square -> square.remove(crop));
     }
 
     @Override

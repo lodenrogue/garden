@@ -16,7 +16,7 @@ class RotationTest {
     }
 
     @Test
-    void should_returnTrue_when_checkingBedThatIsPastPeriodForGivenCrop() {
+    void should_returnTrue_when_checkingBedThatIsPastPeriodForGivenCropFamily() {
         int rotationPeriod = 3;
 
         String family = "nightshade";
@@ -37,7 +37,7 @@ class RotationTest {
     }
 
     @Test
-    void should_returnFalse_when_checkingBedThatIsNotPastPeriodForGivenCrop() {
+    void should_returnFalse_when_checkingBedThatIsNotPastPeriodForGivenCropFamily() {
         int rotationPeriod = 3;
 
         String family = "nightshade";
@@ -58,7 +58,7 @@ class RotationTest {
     }
 
     @Test
-    void should_returnTrue_when_checkingBedThatHasOtherHarvestedCropFamiliesAndIsPastRotationPeriodForGivenCrop() {
+    void should_returnTrue_when_checkingBedThatHasOtherHarvestedCropFamiliesAndIsPastRotationPeriodForGivenCropFamily() {
         int rotationPeriod = 3;
 
         Crop basil = new Crop("basil", "mint", 36, 4);

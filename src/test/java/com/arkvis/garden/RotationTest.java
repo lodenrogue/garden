@@ -10,9 +10,9 @@ class RotationTest {
 
     @Test
     void should_returnTrue_when_checkingBedThatHasNoHistoryIsPastRotationPeriod() {
-        Crop crop = new Crop("tomato", "nightshade", 16, 16);
+        String family = "nightshade";
         Bed bed = new Bed(1);
-        assertTrue(bed.isPastRotationPeriodFor(crop));
+        assertTrue(bed.isPastRotationPeriodFor(family));
     }
 
     @Test
@@ -33,8 +33,7 @@ class RotationTest {
         bed.harvest(firstHarvestedTomato, harvestDate);
         bed.harvest(secondHarvestedTomato, harvestDate);
 
-        Crop testCrop = new Crop("tomato", family, 36, 16);
-        assertTrue(bed.isPastRotationPeriodFor(testCrop));
+        assertTrue(bed.isPastRotationPeriodFor(family));
     }
 
     @Test
@@ -55,8 +54,7 @@ class RotationTest {
         bed.harvest(firstHarvestedTomato, harvestDate);
         bed.harvest(secondHarvestedTomato, harvestDate);
 
-        Crop testCrop = new Crop("tomato", family, 36, 16);
-        assertFalse(bed.isPastRotationPeriodFor(testCrop));
+        assertFalse(bed.isPastRotationPeriodFor(family));
     }
 
     @Test
@@ -76,15 +74,13 @@ class RotationTest {
         bed.harvest(basil, harvestDate);
         bed.harvest(corn, harvestDate);
 
-        Crop testCrop = new Crop("tomato", "nightshade", 36, 16);
-        assertTrue(bed.isPastRotationPeriodFor(testCrop));
+        assertTrue(bed.isPastRotationPeriodFor("nightshade"));
     }
 
     @Test
     void should_returnNoDate_when_gettingRotationEndDateInBedThatHasNoHistory() {
-        Crop crop = new Crop("tomato", "nightshade", 36, 16);
         Bed bed = new Bed(1);
-        assertNull(bed.getRotationEndDateFor(crop));
+        assertNull(bed.getRotationEndDateFor("nightshade"));
     }
 
     @Test
@@ -105,8 +101,7 @@ class RotationTest {
         bed.harvest(firstBasil, harvestDate.minusDays(10));
         bed.harvest(secondBasil, harvestDate);
 
-        Crop testCrop = new Crop("basil", family, 36, 4);
-        LocalDate rotationEndDate = bed.getRotationEndDateFor(testCrop);
+        LocalDate rotationEndDate = bed.getRotationEndDateFor(family);
         LocalDate expectedDate = harvestDate.plusYears(rotationPeriod);
 
         assertEquals(expectedDate, rotationEndDate);
@@ -130,8 +125,7 @@ class RotationTest {
         bed.harvest(firstBasil, harvestDate.minusDays(10));
         bed.harvest(secondBasil, harvestDate);
 
-        Crop testCrop = new Crop("basil", family, 36, 4);
-        LocalDate rotationEndDate = bed.getRotationEndDateFor(testCrop);
+        LocalDate rotationEndDate = bed.getRotationEndDateFor(family);
         LocalDate expectedDate = harvestDate.plusYears(rotationPeriod);
 
         assertEquals(expectedDate, rotationEndDate);

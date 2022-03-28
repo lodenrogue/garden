@@ -62,16 +62,16 @@ class Square {
         return Collections.unmodifiableList(history);
     }
 
-    boolean isPastRotationPeriodFor(Crop target) {
+    boolean isPastRotationPeriodFor(String cropFamily) {
         LocalDate rotationCutOffDate = LocalDate.now().minusYears(rotationPeriodInYears);
         return history.stream()
-                .filter(crop -> crop.isSameFamilyAs(target))
+                .filter(crop -> crop.getFamily().equals(cropFamily))
                 .allMatch(crop -> crop.wasHarvestedBefore(rotationCutOffDate));
     }
 
-    LocalDate getRotationEndDateFor(Crop target) {
+    LocalDate getRotationEndDateFor(String cropFamily) {
         return history.stream()
-                .filter(crop -> crop.isSameFamilyAs(target))
+                .filter(crop -> crop.getFamily().equals(cropFamily))
                 .map(Crop::getHarvestedDate)
                 .max(Comparator.naturalOrder())
                 .map(date -> date.plusYears(rotationPeriodInYears))

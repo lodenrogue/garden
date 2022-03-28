@@ -72,14 +72,14 @@ public class Bed {
         squares.forEach(square -> square.harvest(crop, harvestDate));
     }
 
-    public boolean isPastRotationPeriodFor(Crop crop) {
+    public boolean isPastRotationPeriodFor(String cropFamily) {
         return squares.stream()
-                .allMatch(square -> square.isPastRotationPeriodFor(crop));
+                .allMatch(square -> square.isPastRotationPeriodFor(cropFamily));
     }
 
-    public LocalDate getRotationEndDateFor(Crop crop) {
+    public LocalDate getRotationEndDateFor(String cropFamily) {
         return squares.stream()
-                .map(square -> square.getRotationEndDateFor(crop))
+                .map(square -> square.getRotationEndDateFor(cropFamily))
                 .filter(Objects::nonNull)
                 .max(Comparator.naturalOrder())
                 .orElse(null);

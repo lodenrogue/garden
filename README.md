@@ -100,21 +100,22 @@ History is sorted oldest harvested crop first.
 List<Crop> history = bed.getHistory(square);
 ```
 
-### Checking whether a bed is past a rotation period for a given crop
+### Checking whether a bed is past a rotation period for a given crop family
 
 Return true if the rotation period has passed since the last harvest of this crop's family.
 
 ``` java
-boolean isPastRotationPeriod = bed.isPastRotationPeriodFor(crop);
+String cropFamily = "nightshade";
+boolean isPastRotationPeriod = bed.isPastRotationPeriodFor(cropFamily);
 ```
 
-### Getting rotation end date for a given crop
+### Getting rotation end date for a given crop family
 
-Returns the end date of the current rotation period for a given crop's family. If there is no history for a given crop's
+Returns the end date of the current rotation period for a given crop family. If there is no history for a given crop
 family then null is returned.
 
 ``` java
-LocalDate rotationEndDate = bed.getRotationEndDateFor(crop);
+LocalDate rotationEndDate = bed.getRotationEndDateFor(cropFamily);
 ```
 
 ### Removing a crop

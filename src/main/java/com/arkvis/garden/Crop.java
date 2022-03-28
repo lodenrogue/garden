@@ -80,8 +80,4 @@ public class Crop {
     boolean wasHarvestedBefore(LocalDate rotationDate) {
         return harvestedDate.isBefore(rotationDate);
     }
-
-    boolean isSameFamilyAs(Crop target) {
-        return family.equals(target.getFamily());
-    }
 }

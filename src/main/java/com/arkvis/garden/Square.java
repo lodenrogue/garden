@@ -20,7 +20,10 @@ class Square {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Square square = (Square) o;
-        return rotationPeriodInYears == square.rotationPeriodInYears && pointsAvailable == square.pointsAvailable && sownCrops.equals(square.sownCrops) && history.equals(square.history);
+        return rotationPeriodInYears == square.rotationPeriodInYears
+                && pointsAvailable == square.pointsAvailable
+                && sownCrops.equals(square.sownCrops)
+                && history.equals(square.history);
     }
 
     @Override

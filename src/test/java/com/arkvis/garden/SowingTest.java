@@ -113,4 +113,14 @@ class SowingTest {
         bed.sow(0, tomato);
         assertThrows(IllegalStateException.class, () -> bed.sow(1, tomato));
     }
+
+    @Test
+    void should_throwException_when_sowingSameCropInMoreThanOneBed() {
+        Crop tomato = new Crop("tomato", "nightshade", 36, 16);
+        Bed firstBed = new Bed(1);
+        Bed secondBed = new Bed(1);
+
+        firstBed.sow(0, tomato);
+        assertThrows(IllegalStateException.class, () -> secondBed.sow(0, tomato));
+    }
 }

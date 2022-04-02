@@ -125,15 +125,3 @@ We may want to remove a crop from sown crops or history
 ``` java
 bed.remove(crop);
 ```
-
-### Saving and loading a bed
-
-``` java
-String fileName = "bed.json";
-
-SaveStrategy saveStrategy = new JsonFileSaveStrategy(fileName);
-saveStrategy.save(bed);
-
-LoadStrategy loadStrategy = new JsonFileLoadStrategy(fileName);
-Bed loadedBed = loadStrategy.load();
-```
